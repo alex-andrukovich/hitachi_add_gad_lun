@@ -33,39 +33,39 @@ host_mode_of_my_cluster_of_servers =            "WIN_EX"
 host_mode_options_of_my_cluster_of_servers =    ["2", "22", "25"]
 
 storage_a = {
-    "ip":                   "192.168.88.158",
+    "ip":                   "10.0.0.11",
     "horcm_id":             "210",
-    "horcm_udp":            "45210",
+    "horcm_udp":            "45211",
     "serial":               "placeholder",
-    "site":                 "Site_A",
+    "site":                 "site_one",
     "role":                 "P-VOL",
     "username":             "maintenance",
     "password":             "raid-maintenance"
 }
 storage_b = {
-    "ip":                   "192.168.88.159",
+    "ip":                   "10.0.0.12",
     "horcm_id":             "211",
-    "horcm_udp":            "45211",
+    "horcm_udp":            "45212",
     "serial":               "placeholder",
-    "site":                 "Site_B",
+    "site":                 "site_two",
     "role":                 "S-VOL",
     "username":             "maintenance",
     "password":             "raid-maintenance"
 }
 
 
-servers = [{"server_name" : "windows_srv_2025_node00", "site" : "Site_A", "fabric_a": "74498599092A4B00", "fabric_b": "1959058B0DF6F900"},
-           {"server_name" : "windows_srv_2025_node01", "site" : "Site_A", "fabric_a": "74498599092A4B01", "fabric_b": "1959058B0DF6F901"},
-           {"server_name" : "windows_srv_2025_node02", "site" : "Site_A", "fabric_a": "74498599092A4B02", "fabric_b": "1959058B0DF6F902"},
-           {"server_name" : "windows_srv_2025_node03", "site" : "Site_A", "fabric_a": "74498599092A4B03", "fabric_b": "1959058B0DF6F903"},
-           {"server_name" : "windows_srv_2025_node04", "site" : "Site_A", "fabric_a": "74498599092A4B04", "fabric_b": "1959058B0DF6F904"},
-           {"server_name" : "windows_srv_2025_node05", "site" : "Site_A", "fabric_a": "74498599092A4B05", "fabric_b": "1959058B0DF6F905"},
-		   {"server_name" : "windows_srv_2025_node10", "site" : "Site_B", "fabric_a": "74498599092A4B10", "fabric_b": "1959058B0DF6F910"},
-           {"server_name" : "windows_srv_2025_node11", "site" : "Site_B", "fabric_a": "74498599092A4B11", "fabric_b": "1959058B0DF6F911"},
-           {"server_name" : "windows_srv_2025_node12", "site" : "Site_B", "fabric_a": "74498599092A4B12", "fabric_b": "1959058B0DF6F912"},
-           {"server_name" : "windows_srv_2025_node13", "site" : "Site_B", "fabric_a": "74498599092A4B13", "fabric_b": "1959058B0DF6F913"},
-           {"server_name" : "windows_srv_2025_node14", "site" : "Site_B", "fabric_a": "74498599092A4B14", "fabric_b": "1959058B0DF6F914"},
-           {"server_name" : "windows_srv_2025_node15", "site" : "Site_B", "fabric_a": "74498599092A4B15", "fabric_b": "1959058B0DF6F915"},
+servers = [{"server_name" : "windows_srv_2025_node00", "site" : "site_one", "fabric_a": "74498599092A4B00", "fabric_b": "1959058B0DF6F900"},
+           {"server_name" : "windows_srv_2025_node01", "site" : "site_one", "fabric_a": "74498599092A4B01", "fabric_b": "1959058B0DF6F901"},
+           {"server_name" : "windows_srv_2025_node02", "site" : "site_one", "fabric_a": "74498599092A4B02", "fabric_b": "1959058B0DF6F902"},
+           {"server_name" : "windows_srv_2025_node03", "site" : "site_one", "fabric_a": "74498599092A4B03", "fabric_b": "1959058B0DF6F903"},
+           {"server_name" : "windows_srv_2025_node04", "site" : "site_one", "fabric_a": "74498599092A4B04", "fabric_b": "1959058B0DF6F904"},
+           {"server_name" : "windows_srv_2025_node05", "site" : "site_one", "fabric_a": "74498599092A4B05", "fabric_b": "1959058B0DF6F905"},
+		   {"server_name" : "windows_srv_2025_node10", "site" : "site_two", "fabric_a": "74498599092A4B10", "fabric_b": "1959058B0DF6F910"},
+           {"server_name" : "windows_srv_2025_node11", "site" : "site_two", "fabric_a": "74498599092A4B11", "fabric_b": "1959058B0DF6F911"},
+           {"server_name" : "windows_srv_2025_node12", "site" : "site_two", "fabric_a": "74498599092A4B12", "fabric_b": "1959058B0DF6F912"},
+           {"server_name" : "windows_srv_2025_node13", "site" : "site_two", "fabric_a": "74498599092A4B13", "fabric_b": "1959058B0DF6F913"},
+           {"server_name" : "windows_srv_2025_node14", "site" : "site_two", "fabric_a": "74498599092A4B14", "fabric_b": "1959058B0DF6F914"},
+           {"server_name" : "windows_srv_2025_node15", "site" : "site_two", "fabric_a": "74498599092A4B15", "fabric_b": "1959058B0DF6F915"},
 ]
 
 ports = {
@@ -509,3 +509,25 @@ create_gad_replication_pairs(storage_a, storage_b, horcm_group_name)
 # Shutdown horcm instances
 # shutdown_horcm_instance(storage_a['horcm_id'], get_horcm_path(os_type), os_type)
 # shutdown_horcm_instance(storage_b['horcm_id'], get_horcm_path(os_type), os_type)
+
+
+# ## Cleanup example
+# pairdisplay -IH210 -g win2025_clu -fcxe -CLI
+# pairsplit -IH210 -g win2025_clu
+# pairsplit -IH210 -g win2025_clu -S
+#
+# raidcom get host_grp -port cl1-a -fx -I210
+# raidcom get host_grp -port cl2-a -fx -I210
+# raidcom get host_grp -port cl1-a -fx -I211
+# raidcom get host_grp -port cl2-a -fx -I211
+#
+# raidcom delete host_grp -port cl1-a win2025_clu@site_one -I210
+# raidcom delete host_grp -port cl1-a win2025_clu@site_two -I210
+# raidcom delete host_grp -port cl2-a win2025_clu@site_one -I210
+# raidcom delete host_grp -port cl2-a win2025_clu@site_two -I210
+#
+# raidcom delete host_grp -port cl1-a win2025_clu@site_one -I211
+# raidcom delete host_grp -port cl1-a win2025_clu@site_two -I211
+# raidcom delete host_grp -port cl2-a win2025_clu@site_one -I211
+# raidcom delete host_grp -port cl2-a win2025_clu@site_two -I211
+
